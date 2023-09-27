@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Новый пользователь</title>
+</head>
+<body>
+  <script>
+    // Проверяем, был ли пользователь на странице ранее
+    if (!localStorage.getItem('username')) {
+      // Если это первый визит, запрашиваем имя пользователя
+      const username = prompt('Добро пожаловать! Назовите, пожалуйста, ваше имя');
+
+      // Записываем имя и текущую дату и время в localStorage
+      if (username) {
+        localStorage.setItem('username', username);
+        const currentDate = new Date();
+        localStorage.setItem('lastVisit', currentDate.toString());
+      }
+    } else {
+      // Если пользователь уже посещал страницу, показываем сообщение о последнем визите
+      const username = localStorage.getItem('username');
+      const lastVisit = new Date(localStorage.getItem('lastVisit'));
+      const changedLastVisit = lastVisit.toLocaleString();
+
+      alert(`Добрый день, ${username}! Давно не виделись. В последний раз вы были у нас ${changedLastVisit}`);
+      
+      // Обновляем дату последнего визита
+      const currentDate = new Date();
+      localStorage.setItem('lastVisit', currentDate.toString());
+    };
+  </script>
+</body>
+</html>
